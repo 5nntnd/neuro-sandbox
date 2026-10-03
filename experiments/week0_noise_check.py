@@ -8,7 +8,8 @@ Setup (once, from the repo root):
 Run:
     python experiments/week0_noise_check.py [--subjects 10] [--perms 200] [--focus 1]
 
-Data downloads go to data/ and the figure goes to outputs/ (both gitignored).
+Data downloads go to the gitignored data/ folder. The printed table and the figure
+are saved in results/ (committed, linked from LOG.md).
 
 Dataset: PhysioNet EEG Motor Movement/Imagery, runs 4, 8, 12 = imagined left vs
 right fist, roughly 45 trials per subject. Cross-validation is leave-one-run-out
@@ -16,6 +17,7 @@ right fist, roughly 45 trials per subject. Cross-validation is leave-one-run-out
 score is shown too, to see how much plain random splitting flatters the result.
 """
 import argparse
+import datetime
 from pathlib import Path
 
 import matplotlib
@@ -24,6 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import mne
 import numpy as np
+import sklearn
 from mne.datasets import eegbci
 from mne.decoding import CSP
 from scipy.stats import binom, binomtest
@@ -33,7 +36,7 @@ from sklearn.pipeline import make_pipeline
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-OUT_DIR = ROOT / "outputs"
+RESULTS_DIR = ROOT / "results"
 RUNS = [4, 8, 12]  # imagined left vs right fist
 SEED = 0
 
@@ -103,10 +106,17 @@ def main():
     if not 1 <= args.focus <= args.subjects:
         parser.error("--focus must be between 1 and --subjects")
     rng = np.random.default_rng(SEED)
+    lines = []
 
+    def say(text=""):
+        print(text, flush=True)
+        lines.append(text)
+
+    say(f"week0_noise_check {datetime.date.today()} | mne {mne.__version__}, "
+        f"scikit-learn {sklearn.__version__}, seed {SEED}")
     results = []
     focus = None
-    print(f"{'subj':>4} {'n':>4} {'run-wise':>9} {'95% CI':>15} {'need':>6} {'shuffled':>9}")
+    say(f"{'subj':>4} {'n':>4} {'run-wise':>9} {'95% CI':>15} {'need':>6} {'shuffled':>9}")
     for subject in range(1, args.subjects + 1):
         X, y, groups = load_subject(subject)
         n = len(y)
@@ -117,28 +127,29 @@ def main():
         shuffled = shuffled_kfold_accuracy(X, y)
         results.append(dict(subject=subject, n=n, acc=acc, lo=ci.low, hi=ci.high,
                             need=need, shuffled=shuffled))
-        print(f"{subject:>4} {n:>4} {acc:>9.2f} {ci.low:>7.2f}-{ci.high:<7.2f} "
-              f"{need:>6.2f} {shuffled:>9.2f}", flush=True)
+        say(f"{subject:>4} {n:>4} {acc:>9.2f} {ci.low:>7.2f}-{ci.high:<7.2f} "
+            f"{need:>6.2f} {shuffled:>9.2f}")
         if subject == args.focus:
             focus = (X, y, groups, acc)
 
     X, y, groups, observed = focus
     print(f"\nPermutation test for subject {args.focus} ({args.perms} shuffles)...", flush=True)
-    null = np.array([runwise_accuracy(X, permuted_labels(y, groups, rng), groups)
+    null =np.array([runwise_accuracy(X, permuted_labels(y, groups, rng), groups)
                      for _ in range(args.perms)])
     p_value = (1 + np.sum(null >= observed)) / (1 + args.perms)
 
     n_sig = sum(r["acc"] >= r["need"] for r in results)
-    print(f"Subject {args.focus}: accuracy {observed:.2f}, permutation p = {p_value:.3f}")
-    print(f"{n_sig}/{len(results)} subjects reach their own significance threshold.")
+    say(f"Subject {args.focus}: accuracy {observed:.2f}, permutation p = {p_value:.3f} "
+        f"({args.perms} shuffles)")
+    say(f"{n_sig}/{len(results)} subjects reach their own significance threshold.")
 
     fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=(13, 4.8),
                                      gridspec_kw=dict(width_ratios=[1, 1.4]))
 
     ax_a.hist(null, bins=np.linspace(0.2, 0.8, 25), color="0.7", edgecolor="white")
-    ax_a.axvline(np.percentile(null, 95), color="tab:red", ls="--", lw=1,
+    ax_a.axvline(observed, color="tab:blue", lw=3, label=f"real labels: {observed:.2f}")
+    ax_a.axvline(np.percentile(null, 95), color="tab:red", ls="--", lw=1.5, zorder=3,
                  label="95th percentile of chance")
-    ax_a.axvline(observed, color="tab:blue", lw=2, label=f"real labels: {observed:.2f}")
     ax_a.set(xlabel="accuracy", ylabel=f"count of {args.perms} label shuffles",
              title=f"A. Subject {args.focus}: what chance looks like\n"
                    f"(n = {len(y)} trials, permutation p = {p_value:.3f})")
@@ -154,17 +165,17 @@ def main():
     ax_b.plot(xs, [r["need"] for r in results], "_", color="tab:red", ms=14, mew=2,
               label="needed to beat chance (p<0.05)")
     ax_b.plot(xs, [r["shuffled"] for r in results], "D", color="0.55", mfc="none",
-              label="shuffled 5-fold (leaky)")
-    ax_b.set(xlabel="subject", ylabel="accuracy", ylim=(0.2, 1.0), xticks=xs,
+              label="shuffled 5-fold, for comparison")
+    ax_b.set(xlabel="subject", ylabel="accuracy", ylim=(0.2, 1.05), xticks=xs,
              title=f"B. Every subject: {n_sig}/{len(results)} clear their own threshold")
-    ax_b.legend(frameon=False, loc="upper right", fontsize=8)
+    ax_b.legend(frameon=False, loc="lower left", fontsize=8)
 
     fig.suptitle("Week 0: how noisy is accuracy with ~45 trials? (imagined left vs right fist)")
     fig.tight_layout()
-    OUT_DIR.mkdir(exist_ok=True)
-    out = OUT_DIR / "week0_noise_check.png"
-    fig.savefig(out, dpi=150)
-    print(f"Saved {out}")
+    RESULTS_DIR.mkdir(exist_ok=True)
+    fig.savefig(RESULTS_DIR / "week0_noise_check.png", dpi=150)
+    (RESULTS_DIR / "week0_noise_check.txt").write_text("\n".join(lines) + "\n")
+    print(f"Saved week0_noise_check.png and .txt in {RESULTS_DIR}")
 
 
 if __name__ == "__main__":

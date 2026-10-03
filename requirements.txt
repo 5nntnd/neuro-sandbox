@@ -1,5 +1,5 @@
-mne
-scikit-learn
-scipy
-numpy
-matplotlib
+mne==1.13.2
+scikit-learn==1.9.1
+scipy==1.18.1
+numpy==2.5.3
+matplotlib==3.11.2

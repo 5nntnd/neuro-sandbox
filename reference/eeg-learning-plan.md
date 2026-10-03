@@ -29,7 +29,7 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
 
 - [ ] Create a virtual environment and run `pip install -r requirements.txt`.
 - [ ] Run `python experiments/week0_noise_check.py`. It downloads runs 4, 8 and 12 for 10 subjects into the gitignored `data/` folder.
-- [ ] Open `outputs/week0_noise_check.png`. Panel A shows what chance accuracy looks like when the labels are shuffled, against the real result. Panel B shows every subject's accuracy with a 95% confidence interval, the accuracy needed to beat chance, and the inflated score from plain shuffled cross-validation.
+- [ ] Open `results/week0_noise_check.png` (the table is in the matching `.txt`). Panel A shows what chance accuracy looks like when the labels are shuffled, against the real result. Panel B shows every subject's accuracy with a 95% confidence interval, the accuracy needed to beat chance, and the score from plain shuffled cross-validation for comparison.
 - [ ] Write one sentence: how much accuracy would you need before believing a single subject's result?
 
 ## Four-week workflow
@@ -122,7 +122,7 @@ print(cross_val_score(clf, X, y, cv=5).mean())
 
 - [ ] 가상환경을 만들고 `pip install -r requirements.txt`를 실행합니다.
 - [ ] `python experiments/week0_noise_check.py`를 실행합니다. 피험자 10명의 4, 8, 12번 런을 gitignore된 `data/` 폴더에 내려받습니다.
-- [ ] `outputs/week0_noise_check.png`를 엽니다. 패널 A는 라벨을 섞었을 때의 우연 수준 정확도 분포를 실제 결과와 비교해 보여주고, 패널 B는 피험자별 정확도와 95% 신뢰구간, 우연 수준을 넘기 위해 필요한 정확도, 무작위 섞기 교차검증이 부풀린 점수를 보여줍니다.
+- [ ] `results/week0_noise_check.png`를 엽니다(표는 같은 이름의 `.txt`에 있습니다). 패널 A는 라벨을 섞었을 때의 우연 수준 정확도 분포를 실제 결과와 비교해 보여주고, 패널 B는 피험자별 정확도와 95% 신뢰구간, 우연 수준을 넘기 위해 필요한 정확도, 비교용으로 무작위 섞기 교차검증 점수를 보여줍니다.
 - [ ] 한 문장 쓰기: 한 피험자의 결과를 믿으려면 정확도가 얼마나 나와야 할까?
 
 ## 4주 작업 흐름
