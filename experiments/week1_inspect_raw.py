@@ -70,7 +70,8 @@ def main():
         f"Sampling rate: {raw.info['sfreq']:.0f} Hz",
         f"EEG channels: {len(mne.pick_types(raw.info, eeg=True))}; "
         f"duration {raw.times[-1]:.0f} s",
-        f"Hardware filters in file: highpass {raw.info['highpass']} Hz, lowpass {raw.info['lowpass']} Hz",
+        f"Filters per MNE: highpass {raw.info['highpass']} Hz, lowpass {raw.info['lowpass']} Hz "
+        f"(EDF header says HP:0Hz LP:0Hz N:0Hz, i.e. none; MNE shows Nyquist as the lowpass)",
         f"Reference: not stored in the EDF files (MNE reports custom_ref_applied="
         f"{raw.info['custom_ref_applied']}); check the PhysioNet dataset page",
     ]
@@ -89,7 +90,7 @@ def main():
         ax.text(f, ax.get_ylim()[1], f" {f}", va="top", fontsize=8)
     ax.set(xlabel="Frequency (Hz)", ylabel="Power (V²/Hz)", title="Mean PSD over all EEG channels")
     fig.tight_layout()
-    fig.savefig(RESULTS_DIR / "week1_psd.png", dpi=120)
+    fig.savefig(RESULTS_DIR / f"week1_psd_s{args.subject}.png", dpi=120)
     plt.close(fig)
 
     # Figure 2: 10 s of raw traces, frontal (eye) vs central (motor) channels
@@ -103,7 +104,7 @@ def main():
     ax.set_yticks([-i * 150 for i in range(len(show))], show)
     ax.set(xlabel="Time (s)", title="Raw EEG 30-40 s, band-passed 1-40 Hz (µV, offset per channel)")
     fig.tight_layout()
-    fig.savefig(RESULTS_DIR / "week1_traces.png", dpi=120)
+    fig.savefig(RESULTS_DIR / f"week1_traces_s{args.subject}.png", dpi=120)
     plt.close(fig)
 
     # ICA on a 1-40 Hz copy (slow drift hurts ICA), looking for eye components
@@ -117,12 +118,12 @@ def main():
     )
     fig = ica.plot_components(show=False)
     fig = fig[0] if isinstance(fig, list) else fig
-    fig.savefig(RESULTS_DIR / "week1_ica_components.png", dpi=100)
+    fig.savefig(RESULTS_DIR / f"week1_ica_components_s{args.subject}.png", dpi=100)
     plt.close("all")
 
     text = "\n".join(lines)
     print(text)
-    (RESULTS_DIR / "week1_inspect_raw.txt").write_text(text + "\n", encoding="utf-8")
+    (RESULTS_DIR / f"week1_inspect_raw_s{args.subject}.txt").write_text(text + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

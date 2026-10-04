@@ -22,6 +22,8 @@ Imagined left vs right fist produces opposite-side mu/beta (8-30 Hz) desynchroni
 - Runs 4, 8, 12 (imagined left vs right fist); trials labelled T1 (left) and T2 (right).
 - Band-pass 8-30 Hz; epoch window 0.5-3.5 s after cue; no baseline correction.
 - CSP with 4 components and `reg='ledoit_wolf'` (closed-form covariance shrinkage, no tuned hyperparameter, chosen because 64 channels with about 15 trials per class per training fold gives a noisy covariance), then LDA, with CSP fitted inside each training fold. Decided 2026-10-04, before any confirmatory run.
+- Re-reference to the common average before filtering. The original reference is undocumented (see `datasets.md`). Decided 2026-10-04.
+- No ICA in the classifier pipeline; ICA is used only as a diagnostic for eye components. The 8-30 Hz band-pass already removes most blink energy, and per-subject component removal would add a data-dependent choice. Decided 2026-10-04.
 - Cross-validation: leave-one-run-out (train on two runs, test on the third).
 - Metrics per subject: accuracy, 95% confidence interval, Cohen's kappa, permutation p-value (1000 permutations).
 - All subjects in the set are reported. No dropping subjects after seeing results.

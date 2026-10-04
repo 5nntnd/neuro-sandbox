@@ -1,0 +1,92 @@
+Based on the sources checked, here is what can be confirmed (and what cannot) about reference, ground, and filtering for the PhysioNet EEG Motor Movement/Imagery Dataset (EEGMMIDB) recorded with BCI2000.
+
+Reference electrode
+Not stated in the primary sources checked.
+
+The PhysioNet dataset page (both current and archive versions) describes the 64‑channel 10‑10 montage and sampling rate but does not specify which electrode(s) were used as reference. It only says:
+
+“The EEG montage includes 64 electrodes from the international 10‑10 system, excluding Nz, F9, F10, FT9, FT10, A1, A2, TP9, TP10, P9, and P10.”
+
+No sentence on that page names a reference site (e.g., Cz, mastoid, earlobes) or says “all channels were referenced to …”.
+
+The Schalk et al. 2004 IEEE TBME BCI2000 paper (as represented in PubMed/IEEE summaries) describes BCI2000 as a general platform and mentions that measurement is usually “unipolar” with a common reference, but the abstract and available snippets do not state which reference was used for this specific dataset or for all 109 subjects.
+
+The BCI2000 wiki “EEG Measurement Setup” page explains typical options (earlobe or mastoid for reference; various ground configurations) but explicitly presents these as examples, not as the configuration used for EEGMMIDB:
+
+“One common configuration is to attach the Ref electrode to one earlobe, and the Gnd electrode to the mastoid on the same side of the head. Another possible configuration is to attach Ref to one mastoid and Gnd to the other mastoid.”
+
+This is general guidance, not a dataset-specific statement.
+
+Secondary sources (MOABB documentation, arXiv papers using EEGMMIDB) sometimes list “Reference: mastoid” in metadata tables, but these are derived/assumed metadata, not direct quotes from the dataset authors, and they do not provide an exact sentence from Schalk et al. or the PhysioNet page stating “the data were recorded with mastoid reference.”
+
+Therefore, for your question:
+
+Which electrode(s) were the reference?
+Not stated in the primary sources checked (PhysioNet EEGMMIDB page, Schalk 2004 BCI2000 paper abstract/description, BCI2000 wiki).
+
+Is the reference the same for all 109 subjects?
+Not stated in those sources.
+
+Ground electrode
+Not stated in the primary sources checked.
+
+The PhysioNet EEGMMIDB pages do not mention a ground electrode location at all.
+
+The BCI2000 wiki again describes typical ground placements (mastoid, forehead, etc.) but does not tie any specific choice to EEGMMIDB.
+
+The Schalk 2004 paper, in the available summaries, does not give a ground location for this dataset.
+
+So:
+
+Which electrode was the ground?
+Not stated in the primary sources checked.
+
+Hardware filters / notch filter / mains frequency
+Here there is at least one explicit statement in a secondary but fairly authoritative source about the raw acquisition:
+
+A paper describing methods on EEGMMIDB states:
+
+“The recordings were sampled at 160 Hz, over 64 channels, without using hardware filters.”
+
+This sentence is about the original recordings (not post‑processing) and directly addresses your hardware filter question.
+
+Regarding notch/mains frequency:
+
+Several later papers that preprocess EEGMMIDB mention applying a 60 Hz notch filter in software (e.g., “notch filtered at 60 Hz to suppress power-line interference”), but these describe their own preprocessing, not the hardware or original acquisition settings.
+
+The BCI2000 wiki notes that amplifiers often provide a notch filter around the mains frequency (50 or 60 Hz depending on country) and that in the US 60 Hz is typical, but it does not say whether a notch was enabled during the EEGMMIDB recordings.
+
+The PhysioNet dataset page and Schalk 2004 paper (in the available text) do not state a notch filter setting or mains frequency for this dataset.
+
+So:
+
+Was any hardware filter stated?
+Yes: one source explicitly says the recordings were made “without using hardware filters.”
+
+Was a notch filter or mains frequency (50/60 Hz) stated for the original recording?
+Not stated in the primary PhysioNet/Schalk sources; later papers apply a 60 Hz software notch during preprocessing, but that is not the same as an acquisition specification.
+
+Re‑referencing (e.g., to average)
+The PhysioNet EEGMMIDB pages present the data as recorded from 64 scalp electrodes in a unipolar montage but do not state that the data were re‑referenced (e.g., to common average) before distribution.
+
+Some toolkits (e.g., MOABB) list “Re‑reference: common average” in their processing pipeline metadata, but that refers to their own preprocessing, not to the raw files as provided by PhysioNet.
+
+I did not find any sentence in the PhysioNet documentation or Schalk 2004 paper saying “the data were re‑referenced to average” or similar.
+
+So:
+
+Does any source say the data were already re‑referenced (e.g., to average)?
+Not stated in the primary sources checked; some analysis pipelines re‑reference the data themselves, but that is not described as a property of the original dataset.
+
+Sources checked
+PhysioNet EEG Motor Movement/Imagery Dataset (current and archive pages) – montage, sampling, no reference/ground specified.
+
+Schalk et al., 2004, “BCI2000: A General-Purpose Brain-Computer Interface (BCI) System,” IEEE TBME 51(6):1034–1043 – general BCI2000 description; no dataset-specific reference/ground details in the available text.
+
+BCI2000 Wiki, “User Tutorial: EEG Measurement Setup” – general guidance on reference/ground options, not EEGMMIDB-specific.
+
+Method papers using EEGMMIDB that mention “without using hardware filters” and software 60 Hz notch filtering during preprocessing.
+
+MOABB dataset metadata (PhysionetMI) – lists “Reference: mastoid” and “Re‑reference: common average” as metadata/preprocessing, not as direct quotes from the original dataset documentation.
+
+If you need a definitive answer for reference/ground, the safest statement based on primary documentation is: not stated. Many groups analyzing EEGMMIDB assume or impose a reference (often common average, sometimes mastoid) in their own pipelines, but that is not documented as part of the original acquisition in the sources checked.

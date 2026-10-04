@@ -1,0 +1,10 @@
+Subject 2, runs [4, 8, 12], mne 1.13.2
+Sampling rate: 160 Hz
+EEG channels: 64; duration 369 s
+Filters per MNE: highpass 0.0 Hz, lowpass 80.0 Hz (EDF header says HP:0Hz LP:0Hz N:0Hz, i.e. none; MNE shows Nyquist as the lowpass)
+Reference: not stored in the EDF files (MNE reports custom_ref_applied=0 (FIFFV_MNE_CUSTOM_REF_OFF)); check the PhysioNet dataset page
+Annotation counts (T0 = rest, T1 = left, T2 = right): {'T0': 45, 'T1': 23, 'T2': 22}
+Line noise (raw, unfiltered): 
+  50 Hz: peak is +1.0 dB above its neighbours
+  60 Hz: peak is +2.1 dB above its neighbours
+ICA (20 components, seed 0): components flagged as eye-related via ['Fp1', 'Fp2'] correlation: [np.int64(0)]

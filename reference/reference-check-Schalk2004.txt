@@ -1,0 +1,61 @@
+Thank you for pushing for the actual Schalk 2004 paper text. I now have the full PDF content. Here is what it does and does not say about reference and ground, with exact quotes.
+
+Reference electrode in Schalk 2004
+The paper does not describe the electrode reference used for the PhysioNet EEG Motor Movement/Imagery Dataset (EEGMMIDB). It only gives one concrete reference configuration, and that is for a different BCI paradigm (slow cortical potentials, SCP), not the motor imagery dataset.
+
+Exact sentence (Section IV-B-2, “Slow Cortical Potentials and Cursor Control”):
+
+“In the standard format, the BCI system records EEG at the vertex referenced to both mastoids and measures SCPs after eliminating artifacts caused by eye movements or blinks.”
+
+Key points:
+
+This sentence refers to the “standard format” of their SCP BCI system, not to the 64‑channel motor movement/imagery recordings.
+
+The paper does not contain any sentence that says, for example, “For the motor imagery dataset, EEG was recorded referenced to …” or “All 64 channels were referenced to Cz / mastoids / earlobes.”
+
+Therefore, for your specific question about EEGMMIDB:
+
+Which electrode(s) were the reference?
+Not stated in Schalk 2004 for the motor imagery dataset. The only explicit reference mentioned is “vertex referenced to both mastoids” for the SCP system, which is a different setup.
+
+Is the reference the same for all 109 subjects?
+Not stated in Schalk 2004 for EEGMMIDB.
+
+Ground electrode in Schalk 2004
+The paper does not specify a ground electrode location for any of the example implementations, including the SCP system or the sensorimotor rhythm / P300 systems. There is no sentence like “the ground was placed at …” or “GND was at Fz / mastoid / forehead,” etc.
+
+Which electrode was the ground?
+Not stated in Schalk 2004.
+
+Hardware filters / notch filter / mains frequency
+The paper discusses filtering conceptually (spatial and temporal filters in software) and mentions a “slow wave filter” and autoregressive spectral estimation, but:
+
+It does not state whether a hardware band‑pass or notch filter was used during acquisition for the motor imagery data.
+
+It does not mention 50 Hz or 60 Hz notch filtering, nor the mains frequency of the recording environment.
+
+So:
+
+Was any hardware filter, notch filter, or mains frequency (50 or 60 Hz) stated?
+Not stated in Schalk 2004 for the motor imagery dataset.
+
+Re‑referencing (e.g., to average)
+The paper describes spatial filtering in general (including “common average” as an example of a spatial filter that BCI2000 can implement), but:
+
+It does not say that the motor imagery data were re‑referenced offline to average or any other reference before distribution.
+
+There is no sentence such as “the data were re‑referenced to the common average” in connection with the motor imagery experiments.
+
+Thus:
+
+Does any source say the data were already re‑referenced (e.g., to average)?
+Not stated in Schalk 2004 for EEGMMIDB.
+
+Sources checked
+Schalk et al., “BCI2000: A General-Purpose Brain-Computer Interface (BCI) System,” IEEE Trans. Biomed. Eng. 51(6):1034–1043, 2004 (full PDF).
+
+PhysioNet EEGMMIDB dataset pages (current and archive), which specify the 10‑10 montage and 160 Hz sampling but do not name reference or ground.
+
+BCI2000 wiki “EEG Measurement Setup,” which gives example reference/ground configurations but not dataset-specific ones.
+
+If you need a definitive reference/ground for EEGMMIDB, the honest answer based on these primary sources is: not stated. The only explicit reference configuration in Schalk 2004 (“vertex referenced to both mastoids”) applies to their SCP BCI, not to the motor movement/imagery dataset.
