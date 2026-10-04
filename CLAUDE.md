@@ -19,6 +19,14 @@ Code so far, all in `experiments/` (run from the repo root with the virtual envi
 
 All of these use runs 4, 8, 12 only (T1 = left, T2 = right; they assert this) and refuse subjects above 10 unless `--allow-confirmatory` is passed. There is no build, lint or test configuration yet. Update this file when the structure changes.
 
+## Where we are (update at the end of each week)
+
+Weeks 0 and 1 are done (last updated 2026-10-04). Read `reference/week1-summary.md` first, then `reference/hypothesis.md` (frozen choices) and the Week 2 section of `reference/eeg-learning-plan.md`.
+
+**Next: Week 2**, on subjects 1-10 only and with no classifier: (1) write one preprocessing function in the frozen order (drop flagged channels, average reference, 8-30 Hz band-pass, epoch 0.5-3.5 s, no rejection), and (2) plot C3 and C4 mu/beta band power for left vs right imagery. Still open from Week 1: the structural check of subjects 11-20 (files, 160 Hz, 64 channels, 45 trials, cue lengths; no classifier output), due before the confirmatory run.
+
+Working habits that have held so far: propose a commit message and wait for the user's go-ahead before committing, then again before pushing; stage files by name and show `git status` first; leave the user's untracked files out unless told; add a `LOG.md` entry for each test and commit its output under `results/`; say plainly when a result is weak or a screenshot does not show what was claimed. Data for subjects 1-10 is already downloaded in the gitignored `data/` folder; on a fresh clone the scripts download it again. The shell is PowerShell on Windows: run scripts with `.venv\Scripts\python experiments\<script>.py`.
+
 ## Repository rules (this repo is public)
 
 - Datasets, downloads and scratch outputs go only in gitignored directories (`data/`, `mne_data/`, `outputs/`). If a new location is needed, add it to `.gitignore` first. Never commit raw or derived data files. `results/` is the exception: it holds the small, curated outputs (text tables, figures) that `LOG.md` links to, and is committed.
