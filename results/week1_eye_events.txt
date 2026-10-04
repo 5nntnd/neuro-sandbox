@@ -1,0 +1,18 @@
+subject	median_p2p_uV	100uV_left/right(p)	150uV_left/right(p)	200uV_left/right(p)
+1	198	23/23 vs 22/22 (p=1.00)	15/23 vs 19/22 (p=0.17)	8/23 vs 14/22 (p=0.08)
+2	69	8/23 vs 3/22 (p=0.17)	6/23 vs 1/22 (p=0.10)	4/23 vs 0/22 (p=0.11)
+3	742	23/23 vs 22/22 (p=1.00)	21/23 vs 19/22 (p=0.67)	21/23 vs 19/22 (p=0.67)
+4	71	3/23 vs 2/22 (p=1.00)	1/23 vs 0/22 (p=1.00)	1/23 vs 0/22 (p=1.00)
+5	105	13/21 vs 12/24 (p=0.55)	6/21 vs 8/24 (p=0.76)	5/21 vs 6/24 (p=1.00)
+6	252	19/24 vs 16/21 (p=1.00)	16/24 vs 12/21 (p=0.55)	15/24 vs 12/21 (p=0.77)
+7	102	13/23 vs 13/22 (p=1.00)	6/23 vs 6/22 (p=1.00)	5/23 vs 6/22 (p=0.74)
+8	99	11/22 vs 10/23 (p=0.77)	7/22 vs 6/23 (p=0.75)	6/22 vs 6/23 (p=1.00)
+9	675	24/24 vs 21/21 (p=1.00)	24/24 vs 21/21 (p=1.00)	24/24 vs 21/21 (p=1.00)
+10	181	23/24 vs 21/21 (p=1.00)	18/24 vs 17/21 (p=0.73)	12/24 vs 8/21 (p=0.55)
+
+All subjects pooled, >100 uV: left 160/230, right 142/220 (Fisher p=0.27)
+All subjects pooled, >150 uV: left 120/230, right 109/220 (Fisher p=0.64)
+All subjects pooled, >200 uV: left 101/230, right 92/220 (Fisher p=0.70)
+
+mne 1.13.2; average reference; 1-40 Hz; epochs 0.5-3.5 s; peak-to-peak on the larger of Fp1 and Fp2.
+Cells are: trials over threshold / trials, left vs right. Per-subject p-values are not corrected for the 10 subjects x 3 thresholds; read them as a diagnostic, not a test result.

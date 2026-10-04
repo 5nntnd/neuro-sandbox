@@ -27,8 +27,8 @@ Standalone base document for a new project. Cost: $0. No hardware, no implants, 
 
 Goal: feel how noisy accuracy is with about 45 trials before you trust any number. Background in `blindspots.md`.
 
-- [ ] Create a virtual environment and run `pip install -r requirements.txt`.
-- [ ] Run `python experiments/week0_noise_check.py`. It downloads runs 4, 8 and 12 for 10 subjects into the gitignored `data/` folder.
+- [x] Create a virtual environment and run `pip install -r requirements.txt`.
+- [x] Run `python experiments/week0_noise_check.py`. It downloads runs 4, 8 and 12 for 10 subjects into the gitignored `data/` folder.
 - [ ] Open `results/week0_noise_check.png` (the table is in the matching `.txt`). Panel A shows what chance accuracy looks like when the labels are shuffled, against the real result. Panel B shows every subject's accuracy with a 95% confidence interval, the accuracy needed to beat chance, and the score from plain shuffled cross-validation for comparison.
 - [x] Write one sentence: how much accuracy would you need before believing a single subject's result? *At 45 trials, at least about 64% under run-wise CV with a permutation p < 0.05; a single 62% (p = 0.065) is not enough.*
 
@@ -38,9 +38,12 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
    - [x] Mark artifacts, try ICA, and note line-noise filtering (50/60 Hz) and the reference used. Done: blinks marked by eye, ICA as diagnostic only, 60 Hz mains varies by subject, reference undocumented (see `datasets.md`, `hypothesis.md`).
    - [x] Check the dataset's license and citation terms. Keep data only in gitignored folders. Done in `datasets.md`.
    - [x] Write the hypothesis and what result would count as "not detected" before looking at any classifier output. Done in `hypothesis.md`.
+   - [x] Find persistently noisy channels with a fixed, label-blind rule and freeze it. Done in `hypothesis.md` (`experiments/week1_bad_channels.py`). Summary of Week 1 in `week1-summary.md`.
+   - [ ] Before the confirmatory run, check subjects 11-20 structurally (files present, 160 Hz, 64 channels, 45 trials, cue lengths) without looking at any classifier output.
 2. **Week 2:** band-pass filter (8-30 Hz for motor imagery), cut epochs around events, view average band power.
    - [x] Fix the filter band and time window now and write them down, so you don't tune them on the test results. Done in `hypothesis.md`.
    - [ ] Plot band power over C3 and C4 for left vs right imagery to see the mu/beta effect itself.
+   - [ ] Put the frozen preprocessing order in one function: drop flagged channels, average reference, 8-30 Hz band-pass, epoch 0.5-3.5 s, no rejection.
 3. **Week 3:** features (band power, CSP) plus a simple classifier (LDA). Cross-validate and report accuracy per subject.
    - [ ] Use run-wise or subject-wise cross-validation, not shuffled trials (PhysioNet has one session per subject).
    - [ ] Keep CSP and any other fitted step inside the cross-validation pipeline.
@@ -120,20 +123,23 @@ print(cross_val_score(clf, X, y, cv=5).mean())
 
 목표: 시행이 약 45개일 때 정확도가 얼마나 흔들리는지 체감한 뒤에 어떤 숫자든 믿기. 배경은 `blindspots.md` 참고.
 
-- [ ] 가상환경을 만들고 `pip install -r requirements.txt`를 실행합니다.
-- [ ] `python experiments/week0_noise_check.py`를 실행합니다. 피험자 10명의 4, 8, 12번 런을 gitignore된 `data/` 폴더에 내려받습니다.
+- [x] 가상환경을 만들고 `pip install -r requirements.txt`를 실행합니다.
+- [x] `python experiments/week0_noise_check.py`를 실행합니다. 피험자 10명의 4, 8, 12번 런을 gitignore된 `data/` 폴더에 내려받습니다.
 - [ ] `results/week0_noise_check.png`를 엽니다(표는 같은 이름의 `.txt`에 있습니다). 패널 A는 라벨을 섞었을 때의 우연 수준 정확도 분포를 실제 결과와 비교해 보여주고, 패널 B는 피험자별 정확도와 95% 신뢰구간, 우연 수준을 넘기 위해 필요한 정확도, 비교용으로 무작위 섞기 교차검증 점수를 보여줍니다.
-- [ ] 한 문장 쓰기: 한 피험자의 결과를 믿으려면 정확도가 얼마나 나와야 할까?
+- [x] 한 문장 쓰기: 한 피험자의 결과를 믿으려면 정확도가 얼마나 나와야 할까? *시행 45개에서는 런 단위 교차검증으로 약 64% 이상이면서 순열검정 p < 0.05여야 하며, 62%(p = 0.065) 하나로는 부족하다.*
 
 ## 4주 작업 흐름
 
 1. **1주차:** 데이터를 불러와 원시 EEG를 그리고, 눈 깜빡임과 근육 노이즈를 표시하며, 채널, 샘플링 속도, 이벤트를 이해합니다.
-   - [ ] 아티팩트를 표시하고 ICA를 시도하며, 전원 잡음 필터(50/60Hz)와 사용한 기준 전극을 기록합니다.
-   - [ ] 데이터셋의 라이선스와 인용 조건을 확인합니다. 데이터는 gitignore된 폴더에만 둡니다.
-   - [ ] 분류기 결과를 보기 전에 가설과 "감지 못 함"으로 볼 결과 기준을 적어 둡니다.
+   - [x] 아티팩트를 표시하고 ICA를 시도하며, 전원 잡음 필터(50/60Hz)와 사용한 기준 전극을 기록합니다. 완료: 눈 깜빡임은 눈으로 확인, ICA는 진단용으로만, 60Hz 전원 잡음은 피험자마다 다름, 기준 전극은 문서화되지 않음(`datasets.md`, `hypothesis.md`).
+   - [x] 데이터셋의 라이선스와 인용 조건을 확인합니다. 데이터는 gitignore된 폴더에만 둡니다. `datasets.md`에 완료.
+   - [x] 분류기 결과를 보기 전에 가설과 "감지 못 함"으로 볼 결과 기준을 적어 둡니다. `hypothesis.md`에 완료.
+   - [x] 고정된 라벨 비참조 규칙으로 계속 잡음이 심한 채널을 찾아 확정합니다. `hypothesis.md`에 완료(`experiments/week1_bad_channels.py`). 1주차 요약은 `week1-summary.md`.
+   - [ ] 확증 실행 전에 피험자 11~20의 구조만 확인합니다(파일 존재, 160Hz, 64채널, 시행 45개, 큐 길이). 분류기 결과는 보지 않습니다.
 2. **2주차:** 대역통과 필터(운동상상은 8~30Hz), 이벤트 주변 에포크 분할, 평균 대역 파워 확인.
-   - [ ] 필터 대역과 시간 구간을 지금 정해서 적어 두고, 테스트 결과를 보면서 조정하지 않습니다.
+   - [x] 필터 대역과 시간 구간을 지금 정해서 적어 두고, 테스트 결과를 보면서 조정하지 않습니다. `hypothesis.md`에 완료.
    - [ ] 왼손/오른손 상상에서 C3, C4의 대역 파워를 그려 mu/beta 효과를 직접 확인합니다.
+   - [ ] 확정한 전처리 순서를 하나의 함수로 만듭니다: 표시된 채널 제외, 평균 기준, 8~30Hz 대역통과, 0.5~3.5초 에포크, 에포크 제외 없음.
 3. **3주차:** 특징(대역 파워, CSP) + 간단한 분류기(LDA). 교차검증 후 피험자별 정확도를 기록합니다.
    - [ ] 시행을 무작위로 섞지 말고 런 단위 또는 피험자 단위 교차검증을 씁니다(PhysioNet은 피험자당 세션이 하나).
    - [ ] CSP 등 학습이 필요한 단계는 모두 교차검증 파이프라인 안에 둡니다.

@@ -35,7 +35,19 @@ Items marked **(verify)** come from memory and have not been checked against a s
 - **Assumed prerequisites:** filtering and sampling basics, epoching and baselines, what CSP does (covariance and eigenvectors) and kinds of CV. Four evenings is optimistic if these are new.
 - **Starter code was untested** when the plan was written. `experiments/week0_noise_check.py` is the tested version.
 
-## E. Gaps in the goal itself
+## E. Found by running Week 0 and Week 1 (2026-10-04)
+
+These were verified on subjects 1-10; the evidence is in `LOG.md`.
+
+- **T1/T2 change meaning between runs.** In runs 4, 8, 12 they are left/right fist imagery; in runs 6, 10, 14 they are both fists/both feet, and runs 3, 7, 11 are real movement. The PhysioNet page does not give the run table (MNE's documentation does). The scripts assert the runs; see `datasets.md`.
+- **The recording reference is undocumented.** Not in the PhysioNet pages, the BCI2000 wiki or Schalk 2004. Do not trust "mastoid" from secondary metadata. We re-reference to the common average ourselves.
+- **Eye artifacts leak into motor channels** by volume conduction at about half their frontal size, so a clean-looking C3/C4 trace can still carry blink energy (section A3 confirmed by eye).
+- **Large frontal swings are everywhere.** Over 150 uV on Fp1/Fp2 in most trials of several subjects, so fixed-threshold epoch rejection would throw most data away. They are balanced between left and right trials, which is what matters.
+- **Mains noise and muscle vary by subject.** 60 Hz from +2 to +42 dB; high 30-55 Hz power at the edges in subjects 5, 7 and 9.
+- **One bad channel can spread through the average reference.** Subject 2's T7 is noisy throughout (possibly an electrode or hardware contact problem; the dataset documents nothing). A fixed label-blind rule handles it; see `hypothesis.md`.
+- **Tooling gotchas.** MNE shows the Nyquist frequency (80 Hz) as the "low-pass" of these files, which have no hardware filters at all, and concatenating runs adds boundary annotations that code must skip.
+
+## F. Gaps in the goal itself
 
 - **No hypothesis or stopping rule.** Decide in advance what counts as "detected" and what counts as "not detected". A null result on imagined vowels is valid and likely.
 - **Terminology:** "imagined speech", "inner speech" and "silent articulation" are different tasks, and papers mix them.
