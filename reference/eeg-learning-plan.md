@@ -35,7 +35,7 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
 ## Four-week workflow
 
 1. **Week 1:** load the data, plot raw EEG, mark blinks and muscle noise, understand channels, sampling rate and events.
-   - [ ] Mark artifacts, try ICA, and note line-noise filtering (50/60 Hz) and the reference used.
+   - [x] Mark artifacts, try ICA, and note line-noise filtering (50/60 Hz) and the reference used. Done: blinks marked by eye, ICA as diagnostic only, 60 Hz mains varies by subject, reference undocumented (see `datasets.md`, `hypothesis.md`).
    - [x] Check the dataset's license and citation terms. Keep data only in gitignored folders. Done in `datasets.md`.
    - [x] Write the hypothesis and what result would count as "not detected" before looking at any classifier output. Done in `hypothesis.md`.
 2. **Week 2:** band-pass filter (8-30 Hz for motor imagery), cut epochs around events, view average band power.

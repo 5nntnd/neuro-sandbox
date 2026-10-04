@@ -4,6 +4,7 @@ What has been tested, and what came out. One sentence per entry, newest first. S
 
 ## 2026-10-04
 
+- `verified` Paired blink spikes about 0.3 s wide on Fp1/Fp2 were found by eye in subjects 2, 5 and 9 using the trace browser; they are clear in subjects 2 and 5, while in subject 9 the frontal channels are dominated by fast noise so the screenshot shows them poorly. [script](experiments/week1_browse_raw.py) · [subject 2](results/week1_blink_traces_s2.png) · [subject 5](results/week1_blink_traces_s5.png) · [subject 9](results/week1_blink_traces_s9.png)
 - `verified` Muscle-band (30-55 Hz) power is much higher at the edges in subjects 5 and 9 (and overall in 7) than in the rest, but left vs right trials differ on at most 2 of 64 channels per subject (about 3 expected by chance), so no sign of muscle faking a left/right result. [script](experiments/week1_survey.py) · [output](results/week1_survey.txt) · [figure](results/week1_emg_topomaps.png)
 - `verified` Mains noise at 60 Hz varies hugely across subjects 1-10 (+2 to +42 dB, strongest in subjects 5 and 7), which sits outside the 8-30 Hz band but is worth keeping in mind. [script](experiments/week1_survey.py) · [output](results/week1_survey.txt)
 - `verified` Subjects 1-10 each have 45 left/right trials (21-24 per class), every cue lasts at least 4.1 s so the 0.5-3.5 s epoch window always fits, and only one odd channel appears (FT8 in subject 4). [script](experiments/week1_survey.py) · [output](results/week1_survey.txt)
