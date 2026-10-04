@@ -30,16 +30,16 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
 - [ ] Create a virtual environment and run `pip install -r requirements.txt`.
 - [ ] Run `python experiments/week0_noise_check.py`. It downloads runs 4, 8 and 12 for 10 subjects into the gitignored `data/` folder.
 - [ ] Open `results/week0_noise_check.png` (the table is in the matching `.txt`). Panel A shows what chance accuracy looks like when the labels are shuffled, against the real result. Panel B shows every subject's accuracy with a 95% confidence interval, the accuracy needed to beat chance, and the score from plain shuffled cross-validation for comparison.
-- [ ] Write one sentence: how much accuracy would you need before believing a single subject's result?
+- [x] Write one sentence: how much accuracy would you need before believing a single subject's result? *At 45 trials, at least about 64% under run-wise CV with a permutation p < 0.05; a single 62% (p = 0.065) is not enough.*
 
 ## Four-week workflow
 
 1. **Week 1:** load the data, plot raw EEG, mark blinks and muscle noise, understand channels, sampling rate and events.
    - [ ] Mark artifacts, try ICA, and note line-noise filtering (50/60 Hz) and the reference used.
-   - [ ] Check the dataset's license and citation terms. Keep data only in gitignored folders.
-   - [ ] Write the hypothesis and what result would count as "not detected" before looking at any classifier output.
+   - [x] Check the dataset's license and citation terms. Keep data only in gitignored folders. Done in `datasets.md`.
+   - [x] Write the hypothesis and what result would count as "not detected" before looking at any classifier output. Done in `hypothesis.md`.
 2. **Week 2:** band-pass filter (8-30 Hz for motor imagery), cut epochs around events, view average band power.
-   - [ ] Fix the filter band and time window now and write them down, so you don't tune them on the test results.
+   - [x] Fix the filter band and time window now and write them down, so you don't tune them on the test results. Done in `hypothesis.md`.
    - [ ] Plot band power over C3 and C4 for left vs right imagery to see the mu/beta effect itself.
 3. **Week 3:** features (band power, CSP) plus a simple classifier (LDA). Cross-validate and report accuracy per subject.
    - [ ] Use run-wise or subject-wise cross-validation, not shuffled trials (PhysioNet has one session per subject).
