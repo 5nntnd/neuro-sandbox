@@ -25,6 +25,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "results"
 RUNS = [4, 8, 12]
+# T1/T2 mean left/right fist ONLY in imagery runs 4, 8, 12. In runs 6, 10, 14 they mean both fists/both feet,
+# and runs 3, 7, 11 are real movement. See reference/datasets.md before changing RUNS.
+assert set(RUNS) <= {4, 8, 12}, "RUNS must be imagery left/right runs 4, 8, 12 (T1=left, T2=right)"
 SEED = 0
 EYE_PROXY = ["Fp1", "Fp2"]  # the dataset has no EOG channel, so frontal channels stand in
 
