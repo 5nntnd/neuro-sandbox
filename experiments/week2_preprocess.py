@@ -27,7 +27,8 @@ N_TRIALS = 45
 mne.set_log_level("ERROR")
 
 
-def preprocess(subject, drop_flagged=True, allow_confirmatory=False):
+def preprocess(subject, drop_flagged=True, allow_confirmatory=False, window=(TMIN, TMAX)):
+    """window is for descriptive plots only (week2_erd_timecourse.py); classification uses the frozen default."""
     if subject > N_EXPLORATORY and not allow_confirmatory:
         raise ValueError("Subjects above 10 are the confirmatory set; pass allow_confirmatory=True.")
     raw = load_raw(subject)
@@ -41,7 +42,7 @@ def preprocess(subject, drop_flagged=True, allow_confirmatory=False):
     events, event_id = mne.events_from_annotations(raw)  # T0 = rest, T1 = left, T2 = right (runs 4, 8, 12)
     epochs = mne.Epochs(
         raw, events, {"left": event_id["T1"], "right": event_id["T2"]},
-        tmin=TMIN, tmax=TMAX, baseline=None, preload=True,
+        tmin=window[0], tmax=window[1], baseline=None, preload=True,
         reject=None, reject_by_annotation=False,  # no rejection, also none at run-boundary annotations
     )
     assert len(epochs) == N_TRIALS, f"subject {subject}: expected {N_TRIALS} epochs, got {len(epochs)}"
