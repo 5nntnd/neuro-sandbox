@@ -42,8 +42,8 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
    - [ ] Before the confirmatory run, check subjects 11-20 structurally (files present, 160 Hz, 64 channels, 45 trials, cue lengths) without looking at any classifier output.
 2. **Week 2:** band-pass filter (8-30 Hz for motor imagery), cut epochs around events, view average band power.
    - [x] Fix the filter band and time window now and write them down, so you don't tune them on the test results. Done in `hypothesis.md`.
-   - [ ] Plot band power over C3 and C4 for left vs right imagery to see the mu/beta effect itself.
-   - [ ] Put the frozen preprocessing order in one function: drop flagged channels, average reference, 8-30 Hz band-pass, epoch 0.5-3.5 s, no rejection.
+   - [x] Plot band power over C3 and C4 for left vs right imagery to see the mu/beta effect itself. Done in `experiments/week2_band_power.py`.
+   - [x] Put the frozen preprocessing order in one function (`experiments/week2_preprocess.py`): drop flagged channels, average reference, 8-30 Hz band-pass, epoch 0.5-3.5 s, no rejection.
 3. **Week 3:** features (band power, CSP) plus a simple classifier (LDA). Cross-validate and report accuracy per subject.
    - [ ] Use run-wise or subject-wise cross-validation, not shuffled trials (PhysioNet has one session per subject).
    - [ ] Keep CSP and any other fitted step inside the cross-validation pipeline.

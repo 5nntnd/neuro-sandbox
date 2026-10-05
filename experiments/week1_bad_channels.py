@@ -29,13 +29,17 @@ N_EXPLORATORY = 10
 mne.set_log_level("ERROR")
 
 
-def robust_z(subject):
-    raw = load_raw(subject)  # native reference, no re-referencing yet
+def robust_z_from_raw(raw):
+    """Channel names and robust z of 30-55 Hz power; raw must be in its native reference."""
     psd = raw.compute_psd(fmin=BAND[0], fmax=BAND[1], picks="eeg")
     log_power = np.log10(psd.get_data().mean(axis=1))
     med = np.median(log_power)
     mad = np.median(np.abs(log_power - med))
     return raw.ch_names, (log_power - med) / (1.4826 * mad)
+
+
+def robust_z(subject):
+    return robust_z_from_raw(load_raw(subject))  # native reference, no re-referencing yet
 
 
 def main():

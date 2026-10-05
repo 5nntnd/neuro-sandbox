@@ -2,6 +2,10 @@
 
 What has been tested, and what came out. One sentence per entry, newest first. Status is `verified`, `refuted` or `open`; each entry links the script and its committed output in `results/`.
 
+## 2026-10-05
+
+- `verified` With the frozen preprocessing, 8 of 10 exploratory subjects show the predicted mu-band (8-12 Hz) lateralization (C4 minus C3 log power higher for right than left imagery; one-sided sign test p = 0.055; 95% bootstrap CI wholly above 0 in subjects 7, 8, 10 and wholly below 0 in subject 6), but only 7 of 10 in beta (13-30 Hz) and the median effects are small (+0.087 and +0.040 log10 units), so the mu/beta lateralization is suggestive but inconsistent between subjects (the mu sign test is not below 0.05 and the beta count is chance-level). [script](experiments/week2_band_power.py) · [preprocessing](experiments/week2_preprocess.py) · [output](results/week2_band_power.txt) · [C3/C4 lines](results/week2_band_power_c3c4.png) · [per-subject effect with CI](results/week2_lateralization_forest.png) · [scalp maps](results/week2_topomaps.png)
+
 ## 2026-10-04
 
 - `verified` A fixed label-blind rule (robust z above 3.5 in 30-55 Hz power) flags only T7 in subject 2 (z = 7.5) and 0 to 4 edge channels in the other subjects, never a motor channel, and flags nothing in the generally noisy subjects 5 and 9. [script](experiments/week1_bad_channels.py) · [output](results/week1_bad_channels.txt)

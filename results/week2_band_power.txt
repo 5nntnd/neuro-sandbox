@@ -1,0 +1,25 @@
+subject	band	dropped	n_left	n_right	effect (LI right - LI left)	95% bootstrap CI	perm p	as predicted
+1	mu (8-12 Hz)	Fp1,F5,T8	23	22	+0.112	[-0.058, +0.282]	0.226	yes
+1	beta (13-30 Hz)	Fp1,F5,T8	23	22	+0.056	[-0.027, +0.136]	0.197	yes
+2	mu (8-12 Hz)	T7	23	22	+0.144	[-0.016, +0.310]	0.093	yes
+2	beta (13-30 Hz)	T7	23	22	+0.054	[-0.088, +0.183]	0.450	yes
+3	mu (8-12 Hz)	FT7	23	22	+0.010	[-0.140, +0.151]	0.892	yes
+3	beta (13-30 Hz)	FT7	23	22	+0.003	[-0.112, +0.123]	0.951	yes
+4	mu (8-12 Hz)	AF7,AF3,AF8,FT8	23	22	+0.062	[-0.086, +0.207]	0.405	yes
+4	beta (13-30 Hz)	AF7,AF3,AF8,FT8	23	22	+0.138	[+0.043, +0.231]	0.008	yes
+5	mu (8-12 Hz)	-	21	24	+0.054	[-0.068, +0.177]	0.393	yes
+5	beta (13-30 Hz)	-	21	24	-0.097	[-0.185, -0.006]	0.043	no
+6	mu (8-12 Hz)	Fp1	24	21	-0.147	[-0.275, -0.022]	0.038	no
+6	beta (13-30 Hz)	Fp1	24	21	-0.020	[-0.100, +0.059]	0.643	no
+7	mu (8-12 Hz)	AF7,F5,T7	23	22	+0.264	[+0.105, +0.408]	0.002	yes
+7	beta (13-30 Hz)	AF7,F5,T7	23	22	+0.192	[+0.112, +0.273]	0.000	yes
+8	mu (8-12 Hz)	FC5,AF7,FT7	22	23	+0.229	[+0.061, +0.394]	0.010	yes
+8	beta (13-30 Hz)	FC5,AF7,FT7	22	23	+0.025	[-0.059, +0.109]	0.570	yes
+9	mu (8-12 Hz)	-	24	21	-0.064	[-0.216, +0.079]	0.423	no
+9	beta (13-30 Hz)	-	24	21	-0.061	[-0.164, +0.043]	0.255	no
+10	mu (8-12 Hz)	Fp2,AF4	24	21	+0.293	[+0.168, +0.412]	0.000	yes
+10	beta (13-30 Hz)	Fp2,AF4	24	21	+0.055	[-0.025, +0.131]	0.164	yes
+
+mu (8-12 Hz): 8 of 10 subjects have the predicted sign; 3 have a CI wholly above 0, 1 wholly below 0; median effect +0.087 (log10 units; +0.1 = 26% more C4 than C3 power)
+beta (13-30 Hz): 7 of 10 subjects have the predicted sign; 2 have a CI wholly above 0, 1 wholly below 0; median effect +0.040 (log10 units; +0.1 = 26% more C4 than C3 power)
+Exploratory subjects only; permutation p-values and bootstrap CIs are uncorrected and descriptive. Epochs: frozen preprocessing (week2_preprocess.py), 45 trials per subject, no rejection. Group topomap uses template channels of subject 5; dropped channels are left out of the mean for that subject.
