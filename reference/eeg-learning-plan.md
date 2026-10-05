@@ -44,6 +44,7 @@ Goal: feel how noisy accuracy is with about 45 trials before you trust any numbe
    - [x] Fix the filter band and time window now and write them down, so you don't tune them on the test results. Done in `hypothesis.md`.
    - [x] Plot band power over C3 and C4 for left vs right imagery to see the mu/beta effect itself. Done in `experiments/week2_band_power.py`.
    - [x] Put the frozen preprocessing order in one function (`experiments/week2_preprocess.py`): drop flagged channels, average reference, 8-30 Hz band-pass, epoch 0.5-3.5 s, no rejection.
+   - [x] Extra checks added during Week 2 (all descriptive, subjects 1-10; see `reference/week2-summary.md`): per-subject effect with bootstrap CI and scalp maps (`week2_band_power.py`), rest-baseline power over time (`week2_erd_timecourse.py`, window kept), and a channel mix-up check (`week2_channel_check.py`, no sign of mislabelled channels).
 3. **Week 3:** features (band power, CSP) plus a simple classifier (LDA). Cross-validate and report accuracy per subject.
    - [ ] Use run-wise or subject-wise cross-validation, not shuffled trials (PhysioNet has one session per subject).
    - [ ] Keep CSP and any other fitted step inside the cross-validation pipeline.

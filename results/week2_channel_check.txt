@@ -1,0 +1,37 @@
+A. neighbour correlation (mean r with the 4 nearest electrodes, 8-30 Hz)
+subject	C3	C4	median over channels	lowest three channels
+1	0.78	0.75	0.78	T10 (0.50), F3 (0.58), TP8 (0.64)
+2	0.66	0.72	0.76	T10 (0.44), TP7 (0.47), C5 (0.49)
+3	0.69	0.69	0.77	T7 (0.49), T9 (0.50), C6 (0.51)
+4	0.71	0.60	0.60	F8 (0.31), F5 (0.32), F7 (0.34)
+5	0.70	0.54	0.47	AF8 (0.04), F8 (0.04), F5 (0.04)
+6	0.78	0.59	0.71	T9 (-0.13), FT7 (-0.04), T10 (0.01)
+7	0.76	0.72	0.79	TP7 (0.61), CP6 (0.64), FC6 (0.65)
+8	0.70	0.67	0.67	F7 (0.17), T9 (0.23), Fp1 (0.28)
+9	0.80	0.83	0.69	T9 (0.00), AF4 (0.02), AF3 (0.08)
+10	0.70	0.67	0.72	FC1 (0.59), FC5 (0.62), T9 (0.63)
+
+B. best ordered channel pair for (right - left) effect, t[b] - t[a]; p from label permutation over all pairs
+subject	band	best pair a->b	best score	p(best)	C3->C4 score	C3->C4 rank of n pairs	p(C3->C4)
+1	mu (8-12 Hz)	O1->T10	3.1	0.429	+1.2	497 of 3660	0.157
+1	beta (13-30 Hz)	PO8->F8	5.0	0.023	+1.6	643 of 3660	0.101
+2	mu (8-12 Hz)	C3->CP4	3.7	0.082	+1.8	155 of 3906	0.048
+2	beta (13-30 Hz)	CP1->O1	4.3	0.166	+1.1	872 of 3906	0.223
+3	mu (8-12 Hz)	C2->C1	2.8	0.529	+0.0	1935 of 3906	0.503
+3	beta (13-30 Hz)	TP8->O1	3.8	0.407	+0.1	1857 of 3906	0.493
+4	mu (8-12 Hz)	CP3->O2	4.0	0.597	+1.1	688 of 3540	0.208
+4	beta (13-30 Hz)	CP5->CP2	4.9	0.052	+3.5	29 of 3540	0.004
+5	mu (8-12 Hz)	FC6->FC2	4.0	0.668	+1.1	644 of 4032	0.162
+5	beta (13-30 Hz)	PO3->CP3	4.8	0.224	-2.1	3800 of 4032	0.983
+6	mu (8-12 Hz)	AFz->CP5	4.2	0.162	-1.7	3324 of 3906	0.982
+6	beta (13-30 Hz)	CP2->C6	2.7	0.361	-0.2	2400 of 3906	0.652
+7	mu (8-12 Hz)	CP3->C4	5.3	0.000	+3.5	62 of 3660	0.001
+7	beta (13-30 Hz)	CP5->CP2	9.9	0.000	+4.7	137 of 3660	0.000
+8	mu (8-12 Hz)	C3->C4	3.1	0.628	+3.1	1 of 3660	0.004
+8	beta (13-30 Hz)	PO8->AF3	4.5	0.139	+0.8	1007 of 3660	0.270
+9	mu (8-12 Hz)	F5->T10	3.4	0.762	-1.1	3363 of 4032	0.799
+9	beta (13-30 Hz)	C2->FC1	3.0	0.845	-1.5	3857 of 4032	0.872
+10	mu (8-12 Hz)	Fz->C4	6.1	0.001	+4.0	28 of 3782	0.000
+10	beta (13-30 Hz)	P2->C6	3.3	0.183	+1.1	456 of 3782	0.121
+
+Descriptive only, exploratory subjects, frozen epochs. p(best) accounts for searching all pairs; p(C3->C4) is one-sided in the predicted direction and uncorrected.
