@@ -2,6 +2,12 @@
 
 What has been tested, and what came out. One sentence per entry, newest first. Status is `verified`, `refuted` or `open`; each entry links the script and its committed output in `results/`.
 
+## 2026-10-06
+
+- `verified` Keeping the flagged channels instead of dropping them changes accuracy by 0.04 or less in every subject (for example subject 4 0.53 to 0.58, subject 2 0.89 to 0.87), so the channel-dropping rule does not drive the Week 3 result. [script](experiments/week3_csp_lda.py) · [output](results/week3_csp_lda.txt) · [figure](results/week3_csp_lda_accuracy.png)
+- `refuted` The classifier weight does not sit over motor cortex in any of subjects 1-10 (motor share 0.17-0.27 versus 0.27-0.28 expected if spread evenly), the top channels of the two passing subjects are occipital/posterior (subject 7: O1, Oz, POz; subject 2: P6, CP6, PO4) and subject 2's pattern has a sharp focal left temporal patch, so by the frozen artifact rule these two passes do not count as brain-based motor imagery decoding, and subjects 7, 8 and 10, which had the clearest C3/C4 mu effect in Week 2, do not decode via C3/C4. [script](experiments/week3_csp_lda.py) · [output](results/week3_csp_lda.txt) · [patterns](results/week3_csp_patterns.png)
+- `verified` CSP (4 components, Ledoit-Wolf) + LDA with leave-one-run-out CV passes the per-subject rule (accuracy at least 0.64 and permutation p below 0.05, 1000 permutations) in only 2 of 10 exploratory subjects (subject 2: 0.89, subject 7: 0.98, the same two as Week 0), the rest sit at 0.51-0.62 with median 0.62 (subject 10: 0.62, p = 0.039, below the accuracy bar). [script](experiments/week3_csp_lda.py) · [output](results/week3_csp_lda.txt) · [figure](results/week3_csp_lda_accuracy.png)
+
 ## 2026-10-05
 
 - `verified` No sign that channels are mixed up in subject 6 or the other weak subjects: subject 6's C3 correlates normally with its neighbours (r 0.78) and its C4 a little less (0.59, versus a subject median of 0.71, far from the near-zero r of a mislabelled electrode), and no channel pair in subject 6 stands out for the right-minus-left effect beyond chance in mu (best pair AFz to CP5, permutation p = 0.16) or beta (p = 0.36), while where an effect exists (subjects 7, 8, 10) the best pair is C3/CP3 to C4/CP2, consistent with correct labels. [script](experiments/week2_channel_check.py) · [output](results/week2_channel_check.txt)

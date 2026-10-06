@@ -19,6 +19,8 @@ Code so far, all in `experiments/` (run from the repo root with the virtual envi
 
 - `week2_preprocess.py`: `preprocess(subject)` returns the 45 frozen-pipeline epochs and the dropped channels (also refuses subjects above 10 unless `allow_confirmatory=True`). `week2_band_power.py`: mu/beta power at C3/C4, left vs right, subjects 1-10, writing `results/week2_band_power.txt` and three figures (C3/C4 lines, per-subject effect with CI, scalp maps). `week2_erd_timecourse.py`: descriptive mu/beta power over time relative to rest (contralateral vs ipsilateral), using a wider epoch only for the plot. `week2_channel_check.py`: neighbour-correlation and best-channel-pair checks for mislabelled channels.
 
+- `week3_csp_lda.py`: CSP (4 components, Ledoit-Wolf) + LDA, leave-one-run-out, subjects 1-10 only; per-subject accuracy, CI, kappa, permutation p (1000), dropped channels, a flagged-channels-kept robustness column and a pattern/region artifact check, writing `results/week3_csp_lda.txt` and two figures. Run index is derived from the event sample (each run is 20000 samples).
+
 All of these use runs 4, 8, 12 only (T1 = left, T2 = right; they assert this) and refuse subjects above 10 unless `--allow-confirmatory` is passed. There is no build, lint or test configuration yet. Update this file when the structure changes.
 
 ## Where we are (update at the end of each week)
