@@ -27,11 +27,12 @@ N_TRIALS = 45
 mne.set_log_level("ERROR")
 
 
-def preprocess(subject, drop_flagged=True, allow_confirmatory=False, window=(TMIN, TMAX)):
-    """window is for descriptive plots only (week2_erd_timecourse.py); classification uses the frozen default."""
+def preprocess(subject, drop_flagged=True, allow_confirmatory=False, window=(TMIN, TMAX), runs=None):
+    """window is for descriptive plots only (week2_erd_timecourse.py); classification uses the frozen default.
+    runs is for the movement positive control only (week3_movement_control.py); default is the imagery runs."""
     if subject > N_EXPLORATORY and not allow_confirmatory:
         raise ValueError("Subjects above 10 are the confirmatory set; pass allow_confirmatory=True.")
-    raw = load_raw(subject)
+    raw = load_raw(subject) if runs is None else load_raw(subject, runs=runs)
 
     names, z = robust_z_from_raw(raw)
     dropped = [n for n, v in zip(names, z) if v > THRESHOLD] if drop_flagged else []

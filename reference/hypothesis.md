@@ -31,6 +31,10 @@ Imagined left vs right fist produces opposite-side mu/beta (8-30 Hz) desynchroni
 - Metrics per subject: accuracy, 95% confidence interval, Cohen's kappa, permutation p-value (1000 permutations).
 - All subjects in the set are reported. No dropping subjects after seeing results.
 
+## Positive control on real movement (added 2026-10-06, no frozen choice changed)
+
+Week 3 on subjects 1-10 found 2 of 10 passing the numeric rule but with patterns away from motor cortex (`LOG.md`, 2026-10-06). To tell "our pipeline cannot see a motor signal" from "imagery signals are weak in this data", run the same frozen pipeline (same preprocessing, CSP + LDA, leave-one-run-out, permutation test, artifact check) on the real-movement left/right fist runs 3, 7, 11 (same cue layout, T1 = left, T2 = right), subjects 1-10 only. This is a diagnostic: it is not a result for the hypothesis above, it changes no choice, and it is not run on subjects 11-20. Reading rule, written before running: if movement gives clear accuracy with patterns over sensorimotor channels in several subjects, the pipeline can see motor signals and the imagery weakness is mostly in the data; if movement also fails or the patterns stay away from motor channels, the problem is in the pipeline or the recordings, and noise reduction (Laplacian, eye regression, run re-centring) becomes worth considering, decided on principle and recorded here.
+
 ## What counts as "detected"
 
 - **Per subject:** accuracy at or above about 64% and permutation p < 0.05. Week 0 found this threshold at 45 trials.

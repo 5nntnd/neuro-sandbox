@@ -2,6 +2,10 @@
 
 What has been tested, and what came out. One sentence per entry, newest first. Status is `verified`, `refuted` or `open`; each entry links the script and its committed output in `results/`.
 
+## 2026-10-07
+
+- `verified` On real left/right fist movement (runs 3, 7, 11, same frozen pipeline) 4 of 10 subjects pass the numeric rule (subjects 1, 4, 7, 10; median accuracy 0.62, the same as imagery), and only subject 10 clearly has its weight on sensorimotor channels (top channels CP4, C4, CP3, CP6, C1; subject 7 is centro-parietal), while subjects 1 and 4 sit occipital and posterior, so even with real movement the pipeline gives a motor-looking classifier in at most 1-2 of 10 subjects, which by the rule written in `hypothesis.md` on 2026-10-06 means the weak imagery result is not simply "the data has no signal" and noise handling is worth examining. Subject 2 (0.89 imagery) drops to 0.60 on real movement, which supports the earlier doubt about its imagery result. The region-share column does not separate subject 10 (motor 0.30 vs 0.28 expected) from the rest, so read the top channels and the topomaps instead. [script](experiments/week3_movement_control.py) · [output](results/week3_movement_control.txt) · [accuracy](results/week3_movement_control_accuracy.png) · [patterns](results/week3_movement_control_patterns.png)
+
 ## 2026-10-06
 
 - `verified` Keeping the flagged channels instead of dropping them changes accuracy by 0.04 or less in every subject (for example subject 4 0.53 to 0.58, subject 2 0.89 to 0.87), so the channel-dropping rule does not drive the Week 3 result. [script](experiments/week3_csp_lda.py) · [output](results/week3_csp_lda.txt) · [figure](results/week3_csp_lda_accuracy.png)

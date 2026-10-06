@@ -34,9 +34,11 @@ EYE_PROXY = ["Fp1", "Fp2"]  # the dataset has no EOG channel, so frontal channel
 mne.set_log_level("ERROR")
 
 
-def load_raw(subject):
+def load_raw(subject, runs=RUNS):
+    """runs defaults to imagery 4, 8, 12; week3_movement_control.py passes the movement runs 3, 7, 11."""
+    assert set(runs) in ({4, 8, 12}, {3, 7, 11}), "runs must be imagery 4, 8, 12 or movement 3, 7, 11 (T1=left, T2=right)"
     DATA_DIR.mkdir(exist_ok=True)
-    paths = eegbci.load_data(subject, RUNS, path=str(DATA_DIR), update_path=False)
+    paths = eegbci.load_data(subject, list(runs), path=str(DATA_DIR), update_path=False)
     raw = mne.concatenate_raws([mne.io.read_raw_edf(p, preload=True) for p in paths])
     eegbci.standardize(raw)
     raw.set_montage("standard_1005")

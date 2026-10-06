@@ -21,7 +21,9 @@ Code so far, all in `experiments/` (run from the repo root with the virtual envi
 
 - `week3_csp_lda.py`: CSP (4 components, Ledoit-Wolf) + LDA, leave-one-run-out, subjects 1-10 only; per-subject accuracy, CI, kappa, permutation p (1000), dropped channels, a flagged-channels-kept robustness column and a pattern/region artifact check, writing `results/week3_csp_lda.txt` and two figures. Run index is derived from the event sample (each run is 20000 samples).
 
-All of these use runs 4, 8, 12 only (T1 = left, T2 = right; they assert this) and refuse subjects above 10 unless `--allow-confirmatory` is passed. There is no build, lint or test configuration yet. Update this file when the structure changes.
+- `week3_movement_control.py`: positive control, the same frozen pipeline on real-movement runs 3, 7, 11 (subjects 1-10 only; diagnostic, see `hypothesis.md`). `load_raw` and `preprocess` take an optional `runs` argument for it; the default is unchanged.
+
+All of these use runs 4, 8, 12 only (except the movement control, which uses runs 3, 7, 11) (T1 = left, T2 = right; they assert this) and refuse subjects above 10 unless `--allow-confirmatory` is passed. There is no build, lint or test configuration yet. Update this file when the structure changes.
 
 ## Where we are (update at the end of each week)
 
